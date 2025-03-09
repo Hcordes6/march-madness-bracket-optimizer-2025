@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class bracketOptimizer {
@@ -20,6 +21,11 @@ public class bracketOptimizer {
                 int rank = Integer.parseInt(values[0]);
                 String team = values[1];
                 String conf = values[2];
+
+                
+
+                Team auburn = new Team(values);
+
 
                 System.out.println("Rank: " + rank + ", Team: " + team + ", Conference: " + conf);
             }
