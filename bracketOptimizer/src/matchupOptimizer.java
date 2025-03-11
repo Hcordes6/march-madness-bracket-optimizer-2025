@@ -69,16 +69,44 @@ public class matchupOptimizer {
                 System.out.println("Team not found. Please enter a valid team name (Case Sensitive): ");
             } else if (team2.getName() == team1.getName()) {
                 System.out.println("Invalid, Enter a NEW team name: ");
-                team2Found = false;
+                team2Found = false; 
             }
         }
 
 
 // ----------------------------Preferred Stat Analysis-----------------------------------
         // Base-5 point system for each stat that matters
+
+        int team1Score = 0;
+        int team2Score = 0;
         
+        // Conference Analysis
+        if ((team1.getConf().equals("SEC")) || (team1.getConf().equals("B12")) || (team1.getConf().equals("B10")) || (team1.getConf().equals("ACC"))) {
+            team1Score += 5;
+        }
+        if ((team2.getConf().equals("SEC")) || (team2.getConf().equals("B12")) || (team2.getConf().equals("B10")) || (team2.getConf().equals("ACC"))) {
+            team2Score += 5;
+        }
 
+        // Wins + SOS Analysis
+        if (Integer.parseInt(team1.getRecord().substring(0, 1)) > Integer.parseInt(team2.getRecord().substring(0, 1)) && team1.getSosAdjEM() > team2.getSosAdjEM()) {
+            team1Score += 15;
+        } else if (Integer.parseInt(team1.getRecord().substring(0, 1)) < Integer.parseInt(team2.getRecord().substring(0, 1)) && team1.getSosAdjEM() < team2.getSosAdjEM()) {
+            team2Score += 15;
+        }
 
+        //
+
+        // Win Calculator
+        if (team1Score > team2Score) {
+            System.out.println(team1.getName() + " is favored to win the matchup against " + team2.getName() + "!");
+            System.out.println(team1Score + " - " + team2Score);
+        } else if (team1Score < team2Score) {
+            System.out.println(team2.getName() + " is favored to win the matchup against " + team1.getName() + "!");
+            System.out.println(team1Score + " - " + team2Score);
+        } else {
+            System.out.println("The matchup between " + team1.getName() + " and " + team2.getName() + " is too close to call!");
+        }
         
     }
 }
