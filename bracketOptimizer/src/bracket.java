@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class bracketOptimizer {
+public class bracket {
     public static void main(String[] args) throws Exception {
         String filePath = "C:\\Users\\hcord\\OneDrive\\Desktop\\March Madness Project Folder\\Kenpom 2025 data Just Copy and Paste - Sheet1.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
