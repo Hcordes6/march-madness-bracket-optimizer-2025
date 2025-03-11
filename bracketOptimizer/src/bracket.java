@@ -21,13 +21,14 @@ public class bracket {
                 int rank = Integer.parseInt(values[0]);
                 String team = values[1];
                 String conf = values[2];
+                int netRegRank = Integer.parseInt(values[20]);
 
                 
 
                 Team auburn = new Team(values);
 
 
-                System.out.println("Rank: " + rank + ", Team: " + team + ", Conference: " + conf);
+                System.out.println("Rank: " + rank + ", Team: " + team + ", Conference: " + conf +", Net Reg Rank: " + netRegRank);
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -176,4 +176,8 @@ public class Team {
         return ncsosAdjEMRank;
     }
 
+    public void compareTo(Team other) {
+        
+    }
+
 }
