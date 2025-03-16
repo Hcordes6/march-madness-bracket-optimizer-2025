@@ -118,27 +118,51 @@ public class matchupOptimizer {
             team2Score += adjOWeight;
         }
 
+        // Luck
+        if(team1.getLuck() > team2.getLuck()) {
+            team1Score += 5;
+        } else if (team1.getLuck() < team2.getLuck()) {
+            team2Score += 5;
+        }
+
         // --------------------------- Win Calculator-----------------------------------
 
         // Compute win probability based on score difference
-        double scoreDiff = team1Score - team2Score; // Positive if team1 is favored, negative if team2 is favored
+        double scoreDiff;
+        boolean team1Favored;
+        if (team1Score > team2Score) {
+            scoreDiff = team1Score - team2Score;
+            team1Favored = true;
+        } else {
+            scoreDiff = team2Score - team1Score;
+            team1Favored = false;
+        }
 
         // Calculate win probability using the score difference
         double weight = 0.1; // Adjust the weight for upset potential
         double winProbability = 1.0 - (1.0 / (1 + Math.exp(weight * scoreDiff)));
 
         // Determine which team is favored
-        if (scoreDiff > 0) {
+        double randomNum = Math.random(); // Generate a random number between 0 and 1
+        boolean upset = false;
+        if(randomNum > winProbability) {
+            team1Favored = !team1Favored; // Flip the favored team if random number is greater than win probability
+            upset = true;
+        }
+        if (team1Favored && upset) {
+            System.out.println(team2.getName() + " upsets with a score of " + team2Score + "and a win probability of " + (1 - winProbability) * 100 + "%");
+            System.out.println("Win probability for Team 1: " + winProbability * 100 + "% with a score of " + team1Score);
+        } else if (team1Favored) {
             System.out.println("Team 1 is favored to win!");
-            System.out.println("Win probability for Team 1: " + winProbability * 100 + "%");
-            System.out.println("Win probability for Team 2: " + (1 - winProbability) * 100 + "%");
-        } else if (scoreDiff < 0) {
+            System.out.println("Win probability for Team 1: " + winProbability * 100 + "% with a score of " + team1Score);
+            System.out.println("Win probability for Team 2: " + (1 - winProbability) * 100 + "% with a score of " + team2Score);
+        } else if(team1Favored == false && upset) {
+            System.out.println(team1.getName() + " upsets with a score of " + team1Score + "and a win probability of " + (1- winProbability) * 100 + "%");
+            System.out.println("Win probability for Team 2: " + winProbability * 100 + "% with a score of " + team2Score);
+        } else if (team1Favored == false) {
             System.out.println("Team 2 is favored to win!");
-            System.out.println("Win probability for Team 1: " + (1 - winProbability) * 100 + "%");
-            System.out.println("Win probability for Team 2: " + winProbability * 100 + "%");
-        } else {
-            System.out.println("The matchup is even!");
-            System.out.println("Win probability for both teams: 50%");
+            System.out.println("Win probability for Team 1: " + (1 - winProbability) * 100 + "% with a score of " + team1Score);
+            System.out.println("Win probability for Team 2: " + winProbability * 100 + "% with a score of " + team2Score);
         }
     }
 }
