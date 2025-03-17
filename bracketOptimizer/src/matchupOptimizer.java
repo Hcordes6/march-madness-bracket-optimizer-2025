@@ -5,9 +5,10 @@ import java.util.Scanner;
 
 public class matchupOptimizer {
     public static void main(String[] args) throws Exception {
-        int columnsTeams = 20; // TODO: Change this when we change the CSV file for seeding
+        int columnsTeams = 22; // TODO: Change this when we change the CSV file for seeding
         int rowsTeams = 40;
-        String filePath = "C:\\Users\\hcord\\OneDrive\\Desktop\\March Madness Project Folder\\Kenpom 2025 data Just Copy and Paste - Sheet1.csv";
+        String filePath = "C:\\Users\\hcord\\OneDrive\\Desktop\\March Madness Project Folder\\FINAL March madness stats - Sheet1.csv";
+        
         String[][] teams = new String[rowsTeams][columnsTeams + 1]; // 2D array of all of the teams in the CSV File
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) { // Use this to create a 2D array of all
                                                                                  // of the teams in the CSV File
@@ -22,6 +23,8 @@ public class matchupOptimizer {
                 String[] values = line.split(","); // Split by comma
                 for (int i = 0; i <= columnsTeams; i++) {
                     teams[lineI][i] = values[i];
+                    if (i == 0) System.out.print(teams[lineI][i] + " = "); // Print team name for debugging
+                    if (i == 2) System.out.println(teams[lineI][i]);
                 }
                 lineI++;
             }

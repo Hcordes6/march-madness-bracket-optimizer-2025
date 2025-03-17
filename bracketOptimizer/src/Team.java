@@ -1,7 +1,8 @@
 public class Team {
+    private int index;
     private int ranking;
     private String name;
-    private String seed; //TODO: Implement Seed
+    private int seed; 
     private String region; //TODO: Implement Region
     private String conf; // Conference
     private String record; // Record formatted as W-L
@@ -32,34 +33,38 @@ public class Team {
     private int ncsosAdjEMRank;
 
     public Team(String[] teamValues) {
-        this.ranking = Integer.parseInt(teamValues[0]);;
-        this.name = teamValues[1];
-        this.seed = null; // TODO: Implement Seed
+        this.index= Integer.parseInt(teamValues[0]); // Assuming the first value is the index
+        this.ranking = Integer.parseInt(teamValues[1]);;
+        this.name = teamValues[2];
+        this.seed = Integer.parseInt(teamValues[3]);
+        
         this.region = null; // TODO: Implement Region
-        this.conf = teamValues[2];  
-        this.record = teamValues[3];
-        this.adjEM = Double.parseDouble(teamValues[4]);
-        this.adjO = Double.parseDouble(teamValues[5]);
-        this.adjORank = Integer.parseInt(teamValues[6]);
-        this.adjD = Double.parseDouble(teamValues[7]);
-        this.adjDRank = Integer.parseInt(teamValues[8]);
-        this.adjT = Double.parseDouble(teamValues[9]);
-        this.adjTRank = Integer.parseInt(teamValues[10]);
-        this.luck = Double.parseDouble(teamValues[11]);
-        this.luckRank = Integer.parseInt(teamValues[12]);
-        this.sosAdjEM = Double.parseDouble(teamValues[13]);
-        this.sosAdjEMRank = Integer.parseInt(teamValues[14]);
-        this.sosOppO = Double.parseDouble(teamValues[15]);
-        this.sosOppORank = Integer.parseInt(teamValues[16]);
-        this.sosOppD = Double.parseDouble(teamValues[17]);
-        this.sosOppDRank = Integer.parseInt(teamValues[18]);
-        this.ncsosAdjEM = Double.parseDouble(teamValues[19]);
-        this.ncsosAdjEMRank = Integer.parseInt(teamValues[20]);
+        this.conf = teamValues[4];  
+        this.record = teamValues[5];
+        this.adjEM = Double.parseDouble(teamValues[6]);
+        this.adjO = Double.parseDouble(teamValues[7]);
+        this.adjORank = Integer.parseInt(teamValues[8]);
+        this.adjD = Double.parseDouble(teamValues[9]);
+        this.adjDRank = Integer.parseInt(teamValues[10]);
+        this.adjT = Double.parseDouble(teamValues[11]);
+        this.adjTRank = Integer.parseInt(teamValues[12]);
+        this.luck = Double.parseDouble(teamValues[13]);
+        this.luckRank = Integer.parseInt(teamValues[14]);
+        this.sosAdjEM = Double.parseDouble(teamValues[15]);
+        this.sosAdjEMRank = Integer.parseInt(teamValues[16]);
+        this.sosOppO = Double.parseDouble(teamValues[17]);
+        this.sosOppORank = Integer.parseInt(teamValues[18]);
+        this.sosOppD = Double.parseDouble(teamValues[19]);
+        this.sosOppDRank = Integer.parseInt(teamValues[20]);
+        this.ncsosAdjEM = Double.parseDouble(teamValues[21]);
+        this.ncsosAdjEMRank = Integer.parseInt(teamValues[22]);
     }
 
     public String toString() {
         return "Team{\n" +
+            "  index=" + index + ",\n" +
             "  name='" + name + "',\n" +
+            "  seed=" + seed + ",\n" +
             "  ranking=" + ranking + ",\n" +
             "  conf='" + conf + "',\n" +
             "  record='" + record + "',\n" +
@@ -83,6 +88,9 @@ public class Team {
             "}";
     }
 
+    public int getIndex() {
+        return index;
+    }
     
     public int getRanking() {
         return ranking;
@@ -92,7 +100,7 @@ public class Team {
         return name;
     }
 
-    public String getSeed() {
+    public int getSeed() {
         return seed;
     }
 
