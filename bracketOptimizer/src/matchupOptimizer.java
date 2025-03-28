@@ -7,7 +7,7 @@ public class matchupOptimizer {
     public static void main(String[] args) throws Exception {
         int columnsTeams = 22; // TODO: Change this when we change the CSV file for seeding
         int rowsTeams = 40;
-        String filePath = "C:\\Users\\hcord\\OneDrive\\Desktop\\March Madness Project Folder\\FINAL March madness stats - Sheet1.csv";
+        String filePath = "C:\\Users\\hcord\\OneDrive\\Desktop\\Personal Projects Folder\\March Madness Project Folder\\FINAL March madness stats - Sheet1.csv"; 
         
         String[][] teams = new String[rowsTeams][columnsTeams + 1]; // 2D array of all of the teams in the CSV File
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) { // Use this to create a 2D array of all
