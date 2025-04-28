@@ -87,6 +87,7 @@ public class matchupOptimizer {
         int winSosWeight = 15;
         int adjEMWeight = 10;
         int adjOWeight = 10;
+        int luckWeight = 5;
 
         // Conference Analysis
         if ((team1.getConf().equals("SEC")) || (team1.getConf().equals("B12")) || (team1.getConf().equals("B10"))
@@ -123,9 +124,9 @@ public class matchupOptimizer {
 
         // Luck
         if(team1.getLuck() > team2.getLuck()) {
-            team1Score += 5;
+            team1Score += luckWeight;
         } else if (team1.getLuck() < team2.getLuck()) {
-            team2Score += 5;
+            team2Score += luckWeight;
         }
 
         // --------------------------- Win Calculator-----------------------------------
@@ -169,6 +170,3 @@ public class matchupOptimizer {
         }
     }
 }
-
-// Graveyard:
-// (line = br.readLine()) != null
