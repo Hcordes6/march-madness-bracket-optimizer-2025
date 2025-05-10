@@ -1,32 +1,30 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class matchupOptimizer {
     public static void main(String[] args) throws Exception {
-        int columnsTeams = 22; // TODO: Change this when we change the CSV file for seeding
+        int columnsTeams = 22; 
         int rowsTeams = 40;
         String filePath = "C:\\Users\\hcord\\OneDrive\\Desktop\\Personal Projects Folder\\March Madness Project Folder\\FINAL March madness stats - Sheet1.csv"; 
+        HashMap<String, Team> teamMap = new HashMap<>(); 
         
-        String[][] teams = new String[rowsTeams][columnsTeams + 1]; // 2D array of all of the teams in the CSV File
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) { // Use this to create a 2D array of all
                                                                                  // of the teams in the CSV File
             int lineI = 0; // Line Iteration
             String line;
             boolean firstLine = true; // To skip header
-            while (lineI < rowsTeams && (line = br.readLine()) != null) { // Holds limit to the amount of teams wanted
+            while ((line = br.readLine()) != null) { // Holds limit to the amount of teams wanted
                 if (firstLine) {
                     firstLine = false; // Skip header
                     continue;
+                    
                 }
-                String[] values = line.split(","); // Split by comma
-                for (int i = 0; i <= columnsTeams; i++) {
-                    teams[lineI][i] = values[i];
-                    if (i == 0) System.out.print(teams[lineI][i] + " = "); // Print team name for debugging
-                    if (i == 2) System.out.println(teams[lineI][i]);
-                }
-                lineI++;
+                String[] values = line.split(",");
+                Team team = new Team(values);
+                teamMap.put(team.getName(), team);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -41,16 +39,11 @@ public class matchupOptimizer {
         boolean team1Found = false;
         while (team1Found == false) {
             String teamName = scanner.next();
-            for (int i = 0; i < rowsTeams; i++) {
-                if (teams[i][1].equals(teamName)) {
-                    team1 = new Team(teams[i]);
-                    System.out.println(team1.toString());
-                    team1Found = true;
-                    break;
-                }
-            }
-            if (team1Found == false) {
+            team1 = teamMap.get(teamName);
+            if (team1 == null) {
                 System.out.println("Team not found. Please enter a valid team name (Case Sensitive): ");
+            } else {
+                team1Found = true;
             }
         }
 
@@ -60,19 +53,14 @@ public class matchupOptimizer {
         boolean team2Found = false;
         while (team2Found == false) {
             String teamName = scanner.next();
-            for (int i = 0; i < rowsTeams; i++) {
-                if (teams[i][1].equals(teamName)) {
-                    team2 = new Team(teams[i]);
-                    System.out.println(team2.toString());
-                    team2Found = true;
-                    break;
-                }
-            }
-            if (team2Found == false) {
+            team2 = teamMap.get(teamName);
+            if (team2 == null) {
                 System.out.println("Team not found. Please enter a valid team name (Case Sensitive): ");
             } else if (team2.getName() == team1.getName()) {
                 System.out.println("Invalid, Enter a NEW team name: ");
                 team2Found = false;
+            } else {
+                team2Found = true;
             }
         }
 
@@ -83,7 +71,7 @@ public class matchupOptimizer {
         int team1Score = 1;
         int team2Score = 1;
 
-        int conferenceWeight = 5;
+        int conferenceWeight = 4;
         int winSosWeight = 15;
         int adjEMWeight = 10;
         int adjOWeight = 10;
